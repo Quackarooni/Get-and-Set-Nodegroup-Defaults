@@ -21,6 +21,13 @@ def get_nodegroups(context):
         if node.type == 'GROUP':
             yield node
 
+if bpy.app.version >= (4, 0, 0): 
+    def get_inputs(tree):
+        return (x for x in tree.interface.items_tree if (x.item_type == 'SOCKET' and x.in_out == 'INPUT'))
+else:
+    def get_inputs(tree):
+        return tree.inputs
+
 class GET_NODEGROUP_DEFAULTS(Operator):
     bl_label = "Get Defaults"
     bl_idname = "node.get_nodegroup_defaults"
@@ -41,7 +48,7 @@ class GET_NODEGROUP_DEFAULTS(Operator):
         apply_mode = fetch_user_preferences(attr_id="apply_to")
 
         for node in get_nodegroups(context):
-            for inp, default in zip(node.inputs, node.node_tree.inputs):
+            for inp, default in zip(node.inputs, get_inputs(node.node_tree)):
 
                 if inp.type in ('SHADER', 'GEOMETRY'):
                     continue
@@ -79,7 +86,7 @@ class SET_NODEGROUP_DEFAULTS(Operator):
         apply_mode = fetch_user_preferences(attr_id="apply_to")
 
         for node in get_nodegroups(context):
-            for inp, default in zip(node.inputs, node.node_tree.inputs):
+            for inp, default in zip(node.inputs, get_inputs(node.node_tree)):
                 if inp.type in ('SHADER', 'GEOMETRY'):
                     continue
                 
