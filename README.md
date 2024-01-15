@@ -1,4 +1,4 @@
-# Node Align
+# Get and Set Nodegroup Defaults
 
 An add-on that for quickly retrieving and modifying default values for selected nodegroups
 
