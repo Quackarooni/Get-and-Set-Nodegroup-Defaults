@@ -36,10 +36,14 @@ class GET_NODEGROUP_DEFAULTS(Operator):
 
     @classmethod
     def poll(cls, context):
-        space = context.space_data
-        is_node_editor = (space.type == 'NODE_EDITOR')
-        is_exists = (space.node_tree is not None)
-        return all((has_nodegroup(context), is_node_editor, is_exists))
+        try:
+            space = context.space_data
+            is_node_editor = (space.type == 'NODE_EDITOR')
+            is_exists = (space.node_tree is not None)
+            return all((has_nodegroup(context), is_node_editor, is_exists))
+            
+        except AttributeError:
+            return False
 
     def execute(self, context):
         update_count = 0
@@ -73,12 +77,16 @@ class SET_NODEGROUP_DEFAULTS(Operator):
 
     @classmethod
     def poll(cls, context):
-        space = context.space_data
-        is_node_editor = (space.type == 'NODE_EDITOR')
-        is_exists = (space.node_tree is not None)
+        try:
+            space = context.space_data
+            is_node_editor = (space.type == 'NODE_EDITOR')
+            is_exists = (space.node_tree is not None)
 
-        are_groups_unique = len(list(get_nodegroups(context))) == len(set(node.node_tree for node in get_nodegroups(context)))
-        return all((has_nodegroup(context), is_node_editor, is_exists, are_groups_unique))
+            are_groups_unique = len(list(get_nodegroups(context))) == len(set(node.node_tree for node in get_nodegroups(context)))
+            return all((has_nodegroup(context), is_node_editor, is_exists, are_groups_unique))
+        
+        except AttributeError:
+            return False
 
     def execute(self, context):
         update_count = 0
