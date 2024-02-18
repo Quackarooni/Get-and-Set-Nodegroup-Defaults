@@ -20,7 +20,7 @@ bl_info = {
     "author": "Quackers",
     "description": "Addon for quickly setting a nodegroup's current values into its defaults and vice-versa.",
     "version": (1, 1, 0),
-    "blender": (3, 0, 0),
+    "blender": (3, 2, 0),
     "location": "Node Editor",
     "category": "Node",
 }
