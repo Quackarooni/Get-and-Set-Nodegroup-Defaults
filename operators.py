@@ -57,7 +57,9 @@ class GET_NODEGROUP_DEFAULTS(Operator):
 
         for node in get_nodegroups(context):
             for inp, default in zip(node.inputs, get_inputs(node.node_tree)):
-
+                if not hasattr(default, "default_value"):
+                    continue
+                
                 if inp.type in ('SHADER', 'GEOMETRY'):
                     continue
 
@@ -100,6 +102,9 @@ class SET_NODEGROUP_DEFAULTS(Operator):
 
         for node in get_nodegroups(context):
             for inp, default in zip(node.inputs, get_inputs(node.node_tree)):
+                if not hasattr(default, "default_value"):
+                    continue
+
                 if inp.type in ('SHADER', 'GEOMETRY'):
                     continue
                 
