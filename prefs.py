@@ -2,6 +2,7 @@ import bpy
 from bpy.props import BoolProperty, EnumProperty
 from .keymaps import keymap_layout
 
+
 class GetSetDefaultsPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
 

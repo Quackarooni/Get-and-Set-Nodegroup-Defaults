@@ -2,6 +2,7 @@ import bpy
 from bpy.types import Panel
 from .operators import fetch_user_preferences
 
+
 class NODE_PT_SETGET_DEFAULTS_PANEL(Panel):
     bl_label = "Nodegroup Defaults"
     bl_space_type = 'NODE_EDITOR'
@@ -26,6 +27,7 @@ class NODE_PT_SETGET_DEFAULTS_PANEL(Panel):
         col.separator()
         col.operator("node.get_nodegroup_defaults")
         col.operator("node.set_nodegroup_defaults")
+
 
 classes = (
     NODE_PT_SETGET_DEFAULTS_PANEL,

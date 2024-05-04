@@ -1,6 +1,7 @@
 import bpy
 from bpy.types import Operator
 
+
 def fetch_user_preferences(attr_id=None):
     prefs = bpy.context.preferences.addons[__package__].preferences
 
@@ -8,6 +9,7 @@ def fetch_user_preferences(attr_id=None):
         return prefs
     else:
         return getattr(prefs, attr_id)
+
 
 def has_nodegroup(context):
     for node in context.selected_nodes:
@@ -21,12 +23,14 @@ def get_nodegroups(context):
         if node.type == 'GROUP':
             yield node
 
+
 if bpy.app.version >= (4, 0, 0): 
     def get_inputs(tree):
         return (x for x in tree.interface.items_tree if (x.item_type == 'SOCKET' and x.in_out == 'INPUT'))
 else:
     def get_inputs(tree):
         return tree.inputs
+
 
 class GET_NODEGROUP_DEFAULTS(Operator):
     bl_label = "Get Defaults"
@@ -69,6 +73,7 @@ class GET_NODEGROUP_DEFAULTS(Operator):
         self.report({'INFO'}, f"Succesfully updated {update_count} out of {total_count} current values.")
         return {'FINISHED'}
 
+
 class SET_NODEGROUP_DEFAULTS(Operator):
     bl_label = "Set Defaults"
     bl_idname = "node.set_nodegroup_defaults"
@@ -109,6 +114,7 @@ class SET_NODEGROUP_DEFAULTS(Operator):
 
         self.report({'INFO'}, f"Succesfully updated {update_count} out of {total_count} default values.")
         return {'FINISHED'}
+
 
 classes = (
     GET_NODEGROUP_DEFAULTS,
