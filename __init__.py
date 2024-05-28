@@ -19,7 +19,7 @@ bl_info = {
     "name": "Get and Set Node Defaults",
     "author": "Quackers",
     "description": "Addon for quickly setting a nodegroup's current values into its defaults and vice-versa.",
-    "version": (1, 1, 0),
+    "version": (1, 1, 1),
     "blender": (3, 2, 0),
     "location": "Node Editor",
     "category": "Node",
