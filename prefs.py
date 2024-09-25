@@ -1,16 +1,11 @@
 import bpy
-from bpy.props import BoolProperty, EnumProperty
+from bpy.props import EnumProperty
+
 from .keymaps import keymap_layout
 
 
 class GetSetDefaultsPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
-
-    show_keymaps: BoolProperty(
-        name="Show Keymaps",
-        default=False,
-        description="When enabled, displays keymap list",
-    )
 
     apply_to: EnumProperty(
         name="Apply to",
